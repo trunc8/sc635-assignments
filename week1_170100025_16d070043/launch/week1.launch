@@ -1,6 +1,6 @@
 
 <launch>
-  <node pkg="week1_170100025_16d070043" type="names_publisher.py" name="topic_publisher1"  output="screen" />
-  <node pkg="week1_170100025_16d070043" type="rolls_publisher.py" name="topic_publisher2"  output="screen" />
-  <node pkg="week1_170100025_16d070043" type="joint_subscriber.py" name="topic_subscriber"  output="screen" />
+  <node pkg="week1_170100025_16d070043" type="names_publisher.py" name="names_publisher_node"  output="screen" />
+  <node pkg="week1_170100025_16d070043" type="rolls_publisher.py" name="roll_publisher_node"  output="screen" />
+  <node pkg="week1_170100025_16d070043" type="joint_subscriber.py" name="joint_subscriber_node"  output="screen" />
 </launch>
