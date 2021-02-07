@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <launch>
   <node pkg="week1_170100025_16d070043" type="names_publisher.py" name="names_publisher_node"  output="screen" />
   <node pkg="week1_170100025_16d070043" type="rolls_publisher.py" name="roll_publisher_node"  output="screen" />
