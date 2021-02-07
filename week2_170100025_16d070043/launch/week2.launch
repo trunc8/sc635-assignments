@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <include file="$(find kobuki_gazebo)/launch/kobuki_empty_world.launch"/>
+  <node pkg="week2_170100025_16d070043" type="odom_subscriber.py" name="odom_subscriber_node"  output="screen" />
+  <node pkg="week2_170100025_16d070043" type="vel_publisher.py" name="vel_publisher_node"  output="log" />
+</launch>
