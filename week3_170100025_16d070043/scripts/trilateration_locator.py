@@ -18,8 +18,11 @@ class Locator:
     self.land_y = None
     self.land_dist = None
     self.land_var = None
-    self.curr_pose = np.array([0,0])
-    self.avg_curr_pose = np.array([0,0])
+
+    self.curr_pose = np.array([0.,0.])
+    self.cum_curr_pose = np.array([0.,0.]) # Cumulative current pose
+    self.sampling_index = 0
+
     self.rate = rospy.Rate(10)
     self.pub = rospy.Publisher('/robot_pose', robot_pose, queue_size=10)
     self.sub = rospy.Subscriber('/trilateration_data', Trilateration, self.trilaterateCallback)
@@ -32,6 +35,18 @@ class Locator:
     self.land_y = [msg.landmarkA.y, msg.landmarkB.y, msg.landmarkC.y]
     self.land_dist = [msg.landmarkA.distance, msg.landmarkB.distance, msg.landmarkC.distance]
     self.land_var = [msg.landmarkA.variance, msg.landmarkB.variance, msg.landmarkC.variance]
+
+    self.sampling_index += 1
+    if (self.sampling_index == 5):
+      self.curr_pose = self.cum_curr_pose/5
+      self.cum_curr_pose = np.array([0.,0.])
+      self.sampling_index = 0
+    else:
+      self.cum_curr_pose += self.getAverageIntersection(
+        self.land_x[0], self.land_y[0], self.land_dist[0],
+        self.land_x[1], self.land_y[1], self.land_dist[1],
+        self.land_x[2], self.land_y[2], self.land_dist[2]
+      )
 
   def solveIntersection(self, x0,y0,r0, x1,y1,r1, X,Y,R):
     '''
@@ -98,17 +113,7 @@ class Locator:
 
     while not rospy.is_shutdown():
       pose_msg = robot_pose()
-      sample_size = 100
-      cum_x = cum_y = 0
-      for i in range(sample_size):
-        x, y = self.getAverageIntersection(
-          self.land_x[0], self.land_y[0], self.land_dist[0],
-          self.land_x[1], self.land_y[1], self.land_dist[1],
-          self.land_x[2], self.land_y[2], self.land_dist[2]
-        )
-        cum_x += x
-        cum_y += y
-      pose_msg.x, pose_msg.y = cum_x/sample_size, cum_y/sample_size
+      pose_msg.x, pose_msg.y = self.curr_pose
       self.pub.publish(pose_msg)
       self.rate.sleep()
 
