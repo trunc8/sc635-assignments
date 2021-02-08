@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <include file="$(find week3)/launch/trilateration_load.launch" />
+  <node pkg="week3_170100025_16d070043" type="trilateration_locator.py" name="trilateration_locator_node" output="screen" />
+</launch>
