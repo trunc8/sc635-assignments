@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os, sys
 
 # Parameters
 A = 4
@@ -9,7 +10,7 @@ start_angle = 0 #0 #np.pi/2
 step_size = np.pi/60
 write = False
 if write:
-	f = open("waypoints.txt", "w")
+	f = open(os.path.join(sys.path[0], "waypoints.txt"), "w")
 
 t = np.arange(start_angle, start_angle+2*np.pi, step_size) #start_angle+2*np.pi
 
@@ -22,7 +23,7 @@ y_diff = np.diff(y)
 E_pos = np.sqrt(x_diff**2 + y_diff**2)
 plt.plot(t[1:], E_pos)
 plt.title("Error in position")
-plt.savefig("Error_pos.png")
+plt.savefig(os.path.join(sys.path[0], "../images/Error_pos.png"))
 plt.close()
 
 # Error in angle - Version 1
@@ -40,7 +41,7 @@ plt.plot(t[2:], E_theta)
 plt.ylabel("Error in degree")
 plt.xlabel("t")
 plt.title("Error in angle")
-plt.savefig("Error_angle_version_1.png")
+plt.savefig(os.path.join(sys.path[0], "../images/Error_angle_version_1.png"))
 plt.close()
 
 # Error in angle - Version 2
@@ -49,4 +50,4 @@ plt.plot(t[1:], E_theta)
 plt.ylabel("Error in degree")
 plt.xlabel("t")
 plt.title("Error in angle")
-plt.savefig("Error_angle_version_2.png")
+plt.savefig(os.path.join(sys.path[0], "../images/Error_angle_version_2.png"))

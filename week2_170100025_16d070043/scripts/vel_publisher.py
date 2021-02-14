@@ -24,10 +24,10 @@ class Velocity_Publisher:
   def controlLoop(self):
     while not rospy.is_shutdown():
       velocity_msg = Twist()
-      max_angular_vel = 0.3
+      max_angular_vel = 0.5
       max_linear_vel = 0.5
-      K1 = 0.4
-      K2 = 0.6
+      K1 = 0.5
+      K2 = 0.5
       if (np.abs(self.E_theta) > 0.1):
         velocity_msg.linear.x = 0.02*self.E_pos
         velocity_msg.angular.z = K1*self.E_theta

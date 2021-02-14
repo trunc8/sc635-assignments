@@ -37,6 +37,7 @@ class Odom_Subscriber:
     while not rospy.is_shutdown():
       if (self.index >= len(self.waypoints)):
         rospy.signal_shutdown("Destination reached!")
+        return
 
       target_x = float(self.waypoints[self.index][0])
       target_y = float(self.waypoints[self.index][1])
@@ -69,13 +70,13 @@ if __name__ == '__main__':
   try:
     odom_subscriber = Odom_Subscriber()
     
-    # Read all waypoints
+    ## Read all waypoints
     csv_reader = csv.reader(open(os.path.join(sys.path[0], 'waypoints.txt')))
     for line in csv_reader:
       odom_subscriber.waypoints.append([line[0],line[1]])
-    # odom_subscriber.waypoints = odom_subscriber.waypoints[::-1]
     
-    while (rospy.get_time()==0): # Wait until node has loaded completely
+    ## Wait until node has loaded completely
+    while (rospy.get_time()==0):
       pass
     rospy.loginfo("Beginning to publish error...")
     odom_subscriber.publishError()

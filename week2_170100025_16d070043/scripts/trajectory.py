@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os, sys
 
 # Parameters
 A = 4
@@ -27,4 +28,5 @@ for iter in range(x.size):
 
 if write:
 	f.close()
-plt.show()
+plt.title("Offline Waypoints")
+plt.savefig(os.path.join(sys.path[0],'../images/Offline_Waypoints.png'))
