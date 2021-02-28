@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <include file="$(find week5)/launch/motion_model_exercise.launch" />
+  <node pkg="week4_170100025_16d070043" type="part_C_belief_prop.py" name="bel_propagator_node" output="screen" />
+</launch>

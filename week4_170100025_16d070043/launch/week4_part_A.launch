@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <include file="$(find week5)/launch/motion_model_exercise.launch" />
+  <node pkg="week4_170100025_16d070043" type="part_A_const_vel.py" name="const_vel_publisher_node" output="screen" />
+</launch>
