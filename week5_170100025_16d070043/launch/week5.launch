@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <include file="$(find week5)/launch/filtering_exercise.launch" />
+  <node pkg="week5_170100025_16d070043" type="controller.py" name="controller_node" output="screen" />
+</launch>
