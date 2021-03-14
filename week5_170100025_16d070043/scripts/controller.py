@@ -8,6 +8,7 @@ import numpy as np
 import math
 from math import atan, atan2, pi
 import tf
+import matplotlib.pyplot as plt
 
 from week5.msg import Trilateration
 from trilateration import varA, varB, varC
@@ -24,6 +25,10 @@ varTHETA, varX, varY = 0.01, 0.05, 0.05
 Q = np.diag([varA, varB, varC]) ## Imported from trilateration
 R = np.diag([varX, varY, varTHETA]) 
 E = np.diag([0.5, 0.5, 0.5])  ## Some reasonable initial values
+
+cov_1 = []
+cov_2 = []
+cov_3 = []
 
 F = np.eye(3)                   ## System matrix for discretized unicycle is Identity 
 H = np.zeros((3,2))             #get_current_H(pose, landmarkA, landmarkB, landmarkC)
@@ -172,6 +177,10 @@ def callback(data):
   # P(k+1|k+1)
   E = np.dot((np.eye(3) - np.dot(W,H)), E_p)
 
+  cov_1.append(E[0][0])
+  cov_2.append(E[1][1])
+  cov_3.append(E[2][2])
+
   file_1 = open('covariance_1.txt', 'a+')
   file_1.write(str(E[0][0]))
   file_1.close()
@@ -198,6 +207,11 @@ def poseError(current_pose):
   global index, waypoints
   if index >= len(waypoints):
     rospy.signal_shutdown("Destination reached!")
+    plt.plot(*range(len(cov_1)), cov_1)
+    plt.plot(*range(len(cov_2)), cov_2)
+    plt.plot(*range(len(cov_3)), cov_3)
+    plt.legend(["E[0][0", "E[1][1]", "E[2][2]"])
+    plt.show()
     return
   
   target_x = float(waypoints[index][0])
