@@ -172,6 +172,18 @@ def callback(data):
   # P(k+1|k+1)
   E = np.dot((np.eye(3) - np.dot(W,H)), E_p)
 
+  file_1 = open('covariance_1.txt', 'a+')
+  file_1.write(str(E[0][0]))
+  file_1.close()
+
+  file_2 = open('covariance_2.txt', 'a+')
+  file_2.write(str(E[1][1]))
+  file_2.close()
+
+  file_3 = open('covariance_3.txt', 'a+')
+  file_3.write(str(E[2][2]))
+  file_3.close()
+
   pose = np.array(state.copy())
   pose = pose.reshape(-1)
   prev_pose = pose.copy()
