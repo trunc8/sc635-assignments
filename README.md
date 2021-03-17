@@ -11,17 +11,17 @@ SC635 [Advanced Topics in Mobile Robotics], Spring 2021
 ### Demo Images
 The Kobo robot starts at the center of the circle. Blue dots are trajectory waypoints. Cyan line is the actual trajectory travelled by the robot.
 <p align="center"> 
-    <img src="week3_170100025_16d070043/images/Robot_Motion_variance_given.png" width="500">  
-    Above trajectory is using only the very noisy trilateration data
-</p>
+    <img src="week3_170100025_16d070043/images/Robot_Motion_variance_given.png" width="500">
+</p>  
+Above trajectory is using only the very noisy trilateration data
 <p align="center"> 
     <img src="week5_170100025_16d070043/images/Robot_Motion.png" width="500">  
-    Above trajectory is using EKF on trilateration data and noisy wheel encoder data
-</p>
+</p>  
+Above trajectory is using EKF on trilateration data and noisy wheel encoder data
 <p align="center"> 
     <img src="week4_170100025_16d070043/images/Robot_Belief_t=t1+t2.png" width="500">  
-    Above is the belief propagation using only probabilistic motion model for a linear motion followed by arc motion. Higher probabilities are indicative of where the robot is more likely to be.
-</p>
+</p>  
+Above is the belief propagation using only probabilistic motion model for a linear motion followed by arc motion. Higher probabilities are indicative of where the robot is more likely to be.
 
 ### Authors
 
