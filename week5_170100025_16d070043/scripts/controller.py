@@ -207,10 +207,11 @@ def poseError(current_pose):
   global index, waypoints
   if index >= len(waypoints):
     rospy.signal_shutdown("Destination reached!")
-    plt.plot(*range(len(cov_1)), cov_1)
-    plt.plot(*range(len(cov_2)), cov_2)
-    plt.plot(*range(len(cov_3)), cov_3)
-    plt.legend(["E[0][0", "E[1][1]", "E[2][2]"])
+    # a, b, c = range(len(cov_1)), range(len(cov_2)), range(len(cov_3))
+    plt.plot(cov_1)
+    plt.plot(cov_2)
+    plt.plot(cov_3)
+    plt.legend(["E[0][0]", "E[1][1]", "E[2][2]"])
     plt.show()
     return
   
